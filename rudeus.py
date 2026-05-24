@@ -6,6 +6,9 @@ import asyncio
 from collections import deque
 import time
 import os
+import subprocess
+result = subprocess.run(["which", "ffmpeg"], capture_output=True, text=True)
+FFMPEG_EXEC = result.stdout.strip() or "ffmpeg"
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 TOKEN = os.environ.get("DISCORD_TOKEN") 
@@ -251,7 +254,7 @@ async def play_next(guild_id: int):
     state["current"] = track
     state["start_time"] = time.time()
 
-    source = discord.FFmpegPCMAudio(track["url"], **FFMPEG_OPTIONS)
+    source = discord.FFmpegPCMAudio(track["url"], executable=FFMPEG_EXEC, **FFMPEG_OPTIONS)
     source = discord.PCMVolumeTransformer(source, volume=state["volume"])
 
     def after_playing(error):
