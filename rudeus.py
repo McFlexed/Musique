@@ -20,6 +20,7 @@ YTDL_OPTIONS_SINGLE = {
     "no_warnings": True,
     "default_search": "ytsearch",
     "source_address": "0.0.0.0",
+    "extractor_args": {"youtube": {"player_client": ["android"]}},
 }
 
 YTDL_OPTIONS_PLAYLIST = {
@@ -28,7 +29,8 @@ YTDL_OPTIONS_PLAYLIST = {
     "quiet": True,
     "no_warnings": True,
     "source_address": "0.0.0.0",
-    "extract_flat": "in_playlist",  # rapide : récupère les URLs sans tout télécharger
+    "extract_flat": "in_playlist",
+    "extractor_args": {"youtube": {"player_client": ["android"]}},
 }
 
 FFMPEG_OPTIONS = {
