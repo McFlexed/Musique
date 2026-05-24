@@ -22,7 +22,7 @@ MY_GUILD_ID = 1311010435885174844  # ← remplace par l'ID de ton serveur
 
 # ─── YT-DLP options ───────────────────────────────────────────────────────────
 YTDL_OPTIONS_SINGLE = {
-    "format": "bestaudio/best",
+    "format": "bestaudio[ext=webm]/bestaudio[ext=m4a]/bestaudio/best",
     "noplaylist": True,
     "quiet": True,
     "no_warnings": True,
@@ -33,7 +33,7 @@ YTDL_OPTIONS_SINGLE = {
 }
 
 YTDL_OPTIONS_PLAYLIST = {
-    "format": "bestaudio/best",
+    "format": "bestaudio[ext=webm]/bestaudio[ext=m4a]/bestaudio/best",
     "noplaylist": False,
     "quiet": True,
     "no_warnings": True,
