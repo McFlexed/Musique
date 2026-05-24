@@ -10,6 +10,11 @@ import subprocess
 result = subprocess.run(["which", "ffmpeg"], capture_output=True, text=True)
 FFMPEG_EXEC = result.stdout.strip() or "ffmpeg"
 
+cookies_content = os.environ.get("YOUTUBE_COOKIES", "")
+if cookies_content:
+    with open("/tmp/cookies.txt", "w") as f:
+        f.write(cookies_content)
+
 # ─── Config ───────────────────────────────────────────────────────────────────
 TOKEN = os.environ.get("DISCORD_TOKEN") 
 
@@ -24,6 +29,7 @@ YTDL_OPTIONS_SINGLE = {
     "default_search": "ytsearch",
     "source_address": "0.0.0.0",
     "extractor_args": {"youtube": {"player_client": ["android"]}},
+    "cookiefile": "/tmp/cookies.txt",
 }
 
 YTDL_OPTIONS_PLAYLIST = {
@@ -34,6 +40,7 @@ YTDL_OPTIONS_PLAYLIST = {
     "source_address": "0.0.0.0",
     "extract_flat": "in_playlist",
     "extractor_args": {"youtube": {"player_client": ["android"]}},
+    "cookiefile": "/tmp/cookies.txt",
 }
 
 FFMPEG_OPTIONS = {
