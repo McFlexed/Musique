@@ -30,6 +30,8 @@ YTDL_OPTIONS_SINGLE = {
     "source_address": "0.0.0.0",
     "extractor_args": {"youtube": {"player_client": ["android"]}},
     "cookiefile": "/tmp/cookies.txt",
+    "sleep_interval": 3,
+    "max_sleep_interval": 5,
 }
 
 YTDL_OPTIONS_PLAYLIST = {
@@ -41,6 +43,8 @@ YTDL_OPTIONS_PLAYLIST = {
     "extract_flat": "in_playlist",
     "extractor_args": {"youtube": {"player_client": ["android"]}},
     "cookiefile": "/tmp/cookies.txt",
+    "sleep_interval": 3,
+    "max_sleep_interval": 5,
 }
 
 FFMPEG_OPTIONS = {
@@ -253,6 +257,9 @@ async def play_next(guild_id: int):
         return
 
     track = state["queue"].popleft()
+
+    # ── Délai anti rate-limit YouTube ──
+    await asyncio.sleep(2)
 
     # Résoudre l'URL si piste plate (playlist)
     if track.get("_needs_resolve"):
